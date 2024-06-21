@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="h">
+    <!--导航-->
+    <div>
+        <ul class="layui-nav layui-bg-blue">
+            <li class="layui-nav-item"><a href="/" style="float: left"><strong
+                    style="font-size: 20px">BOOK共享平台</strong></a>
+            </li>
+            <li class="layui-nav-item"><a href="/"><strong style="font-size: 15px">首页</strong></a></li>
+            <li class="layui-nav-item"><a href="/toDownloadCodePage"><strong style="font-size: 15px">文件下载</strong></a></li>
+            <li class="layui-nav-item" lay-unselect="" style="float: right" th:if="${session.currentUser!=null}">
+                <a href="javascript:;"><a href="/toUserBackstagePage"><img th:src="@{'/static/images/userImage/'+${session.currentUser.imageName}}" class="layui-nav-img" th:if="${session.currentUser.imageName!=null}"><span th:text="${session.currentUser.nickName}"></span></a></a>
+                <dl class="layui-nav-child">
+                    <a href="/toUserBackstagePage">个人中心</a>
+                    <a href="/user/logout">注销</a>
+                </dl>
+            </li>
+            <div style="float: right;margin-top: 20px" th:if="${session.currentUser==null}">
+                <a href="/toLoginPage" style="color: white">登录</a>
+                <a href="/toRegisterPage" style="color: white">注册</a>
+            </div>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

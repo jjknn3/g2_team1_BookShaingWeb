@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="b">
+    <!--内容-->
+    <div>
+        <!--公告-->
+        <div class="layui-col-md12" style="margin-top: 5px">
+            <!--条件检索-->
+            <div style="margin-top: 2px;margin-right: 5px">
+                <blockquote class="layui-elem-quote" style="border-color: red">
+                    <strong><i class="layui-icon layui-icon-reply-fill"
+                               style="font-size: 16px;color: red">友情提示</i></strong>
+                    <hr class="layui-bg-red">
+                    <span style="color: red">文明共享,共建和谐网站</span>
+                </blockquote>
+            </div>
+        </div>
+        <!--左边内容-->
+        <div class="layui-col-md9" style="margin-top: 5px">
+            <div style="margin-top: 2px;margin-right: 5px">
+                <form action="/toDownloadCodePage" method="post" class="layui-form">
+                <blockquote class="layui-elem-quote" style="border-color: #1e9fff">
+                    <strong><i class="layui-icon layui-icon-component" style="font-size: 16px">资源下载</i></strong>
+                    <hr class="layui-bg-blue">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="450">
+                            <col width="250">
+                            <col width="80">
+                            <col width="170">
+                            <col width="170">
+                            <col width="270">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">资源名称</th>
+                            <th style="text-align: center">所属类别</th>
+                            <th style="text-align: center">发布日期</th>
+                            <th style="text-align: center">文件名称</th>
+                            <th style="text-align: center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="downFile:${downFiles}">
+                            <td style="text-align: center;color: #1e9fff"
+                                th:text="${#strings.abbreviate(downFile.resourceName,16)}"
+                                th:title="${downFile.resourceName}"></td>
+                            <td style="text-align: center" th:text="${downFile.resourceType}"
+                                th:title="${downFile.resourceType}"></td>
+                            <td style="text-align: center"
+                                th:text="${downFile.pushDate}"></td>
+                            <td style="text-align: center" th:text="${downFile.fileName}"></td>
+                            <td style="text-align: center">
+                                <a th:href="@{'/toUpdateArticlePage?id='+${downFile.resourceId}}" class="layui-btn layui-btn-sm"><i
+                                        class="layui-icon layui-icon-edit"></i>下载</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </blockquote>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

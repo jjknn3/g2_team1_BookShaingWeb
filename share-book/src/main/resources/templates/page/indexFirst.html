@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="b">
+    <!--内容-->
+    <div>
+        <!--公告-->
+        <div class="layui-col-md12" style="margin-top: 5px">
+            <!--条件检索-->
+            <div style="margin-top: 2px;margin-right: 5px">
+                <blockquote class="layui-elem-quote" style="border-color: red">
+                    <strong><i class="layui-icon layui-icon-reply-fill"
+                               style="font-size: 16px;color: red">友情提示</i></strong>
+                    <hr class="layui-bg-red">
+                    <span style="color: red">BOOK共享,共建和谐网站</span>
+                </blockquote>
+            </div>
+        </div>
+        <!--左边内容-->
+        <div class="layui-col-md9" style="margin-top: 5px">
+            <!--条件检索-->
+            <div style="margin-top: 2px;margin-right: 5px">
+                <blockquote class="layui-elem-quote" style="border-color: #1e9fff">
+                    <strong><i class="layui-icon layui-icon-search" style="font-size: 16px">条件检索</i></strong>
+                    <hr class="layui-bg-blue">
+                    <div>
+                        <div class="layui-col-md1">
+                            <span style="color: #8D8D8D">资源类别:</span>
+                        </div>
+                        <div class="layui-col-md11">
+                            <a href="/" th:style="${articleTypeId==null?'color:red;float: left':'float: left;color:#1e9fff'}">全部</a>
+                            <div th:each="articleType:${application.articleTypeList}">
+                                <a th:href="@{'/?page=1&articleTypeId='+${articleType.id}}"
+                                   th:style="${articleTypeId == ''+articleType.id+''?'margin-left: 6px;color:red;float: left':'margin-left: 6px;float: left;color:#1e9fff'}"
+                                   th:text="${articleType.name}"></a>
+                            </div>
+                        </div>
+                        <hr style="background-color: #f2f2f2">
+                        <div style="margin-top: 10px">
+                            <div class="layui-col-md1">
+                                <span style="color: #8D8D8D">关键词:</span>
+                            </div>
+                            <div class="layui-col-md9">
+                                <input type="text" id="q" name="q" lay-verify="title" autocomplete="off"
+                                       placeholder="请输入关键词"
+                                       class="layui-input">
+                            </div>
+                            <div class="layui-col-md2">
+                                <button type="button" onclick="searchQ()" class="layui-btn layui-btn-normal"
+                                        lay-submit=""
+                                        lay-filter="demo1"
+                                        style="margin-left: 4px">检索
+                                </button>
+                            </div>
+                        </div>
+                        <hr style="background-color: #f2f2f2">
+                    </div>
+                </blockquote>
+            </div>
+            <!--资源列表-->
+            <div style="margin-top: 2px;margin-right: 5px">
+                <blockquote class="layui-elem-quote" style="border-color: #1e9fff">
+                    <strong><i class="layui-icon layui-icon-template-1" style="font-size: 16px">资源列表</i></strong><span
+                        style="color: green">（当前有 <span th:text="${total}" style="color: red"></span> 个资源）</span><i
+                        class="layui-icon-tips layui-icon"
+                        style="color: #1e9fff;font-size: 16px;float: right">点击名称可查看详情</i>
+                    <hr class="layui-bg-blue">
+                    <table class="layui-table" lay-skin="line">
+                        <colgroup>
+                            <col width="400">
+                            <col width="140">
+                            <col width="140">
+                            <col width="140">
+                            <col width="140">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">资源名称</th>
+                            <th style="text-align: center">查看次数</th>
+                            <th style="text-align: center">上传者</th>
+                            <th style="text-align: center">上传日期</th>
+                            <th style="text-align: center">所需积分</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="article:${articleList}">
+                            <td style="text-align: center"><a style="color: #1e9fff" th:href="@{'/article/'+${article.id}}"
+                                                              th:text="${#strings.abbreviate(article.name,22)}"
+                                                              th:title="${article.name}"></a></td>
+                            <td style="text-align: center"><span th:text="${article.click}"></span>&nbsp;次</td>
+                            <td style="text-align: center"><span th:text="${article.user.nickName}"></span></td>
+                            <td style="text-align: center"><span
+                                    th:text="${#dates.format(article.publishDate,'yyyy-MM-dd')}"></span></td>
+                            <td style="text-align: center"><span th:text="${article.points}"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div align="center">
+                        <div class="layui-box layui-laypage" th:utext="${pageCode}">
+
+                        </div>
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+        <!--右边内容-->
+        <div class="layui-col-md3" style="margin-top: 7px">
+            <blockquote class="layui-elem-quote" style="border-color: #1e9fff">
+                <strong><i class="layui-icon layui-icon-fire" style="font-size: 16px">热门资源</i></strong>
+                <hr class="layui-bg-blue">
+                <div th:each="articleHot:${application.articleListHot}" th:if="${articleHotStat.count<=30}">
+                    <p><a style="color: #1e9fff" th:href="@{'/article/'+${articleHot.id}}" th:text="${#strings.abbreviate(articleHot.name,20)}"
+                          th:title="${articleHot.name}"></a></p>
+                </div>
+            </blockquote>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.UserMapper">
+    <resultMap id="UserResult" type="User">
+        <result property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="password" column="password"/>
+        <result property="nickName" column="nickName"/>
+        <result property="email" column="email"/>
+        <result property="imageName" column="imageName"/>
+        <result property="points" column="points"/>
+        <result property="isVip" column="isVip"/>
+        <result property="isOff" column="isOff"/>
+        <result property="roleName" column="roleName"/>
+        <result property="registerDate" column="registerDate"/>
+    </resultMap>
+
+    <select id="list" parameterType="map" resultMap="UserResult">
+        select *
+        from t_user
+        <where>
+            <if test="userName != null and userName != ''">
+                and userName like #{userName}
+            </if>
+            <if test="email != null and email != ''">
+                and email like #{email}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and roleName = #{roleName}
+            </if>
+            <if test="isVip != null">
+                and isVip = #{isVip}
+            </if>
+            <if test="isOff != null">
+                and isOff = #{isOff}
+            </if>
+            <if test="key != null">
+                and roleName!='管理员'
+            </if>
+        </where>
+        <if test="start != null and size != null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="getTotal" parameterType="map" resultType="java.lang.Long">
+        select count(*)
+        from t_user
+        <where>
+            <if test="userName != null and userName != ''">
+                and userName like #{userName}
+            </if>
+            <if test="email != null and email != ''">
+                and email like #{email}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and roleName = #{roleName}
+            </if>
+            <if test="isVip != null">
+                and isVip = #{isVip}
+            </if>
+            <if test="isOff != null">
+                and isOff = #{isOff}
+            </if>
+            <if test="key != null">
+                and roleName!='管理员'
+            </if>
+        </where>
+    </select>
+
+    <insert id="add" parameterType="User">
+        insert into t_user (userName, password, nickName, email, imageName, points, isVip, isOff, roleName,
+                            registerDate)
+        values (#{userName}, #{password}, #{nickName}, #{email}, #{imageName}, 100, 0, 0, "普通用户", now());
+    </insert>
+
+    <update id="update" parameterType="User">
+        update t_user
+        <set>
+            <if test="password != null and password != ''">
+                password=#{password},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nickName=#{nickName},
+            </if>
+            <if test="email != null and email != ''">
+                email=#{email},
+            </if>
+            <if test="imageName != null and imageName != ''">
+                imageName=#{imageName},
+            </if>
+            <if test="isVip != null">
+                isVip=#{isVip},
+            </if>
+            <if test="isOff != null">
+                isOff=#{isOff},
+            </if>
+            <if test="roleName != null and roleName != ''">
+                roleName=#{roleName},
+            </if>
+            <if test="points != null">
+                points=#{points},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="integer">
+        delete
+        from t_user
+        where id = #{id}
+    </delete>
+
+    <select id="findByUserName" parameterType="string" resultMap="UserResult">
+        select *
+        from t_user
+        where userName = #{userName}
+    </select>
+
+    <select id="findById" parameterType="integer" resultMap="UserResult">
+        select * from t_user where id=#{id}
+    </select>
+
+    <select id="findByEmail" parameterType="string" resultMap="UserResult">
+        select * from t_user where email=#{email}
+    </select>
+
+    <select id="findByName" parameterType="string" resultMap="UserResult">
+        select * from t_user
+        <where>
+            <if test="userName != null and userName != ''">
+                and userName like #{userName}
+            </if>
+        </where>
+    </select>
+</mapper>
