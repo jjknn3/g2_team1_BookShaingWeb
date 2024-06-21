@@ -24,9 +24,6 @@ import java.util.stream.Collectors;
 
 /**
  * 首页Controller层
- *
- 
- * @company
  */
 @Controller
 public class IndexController implements CommandLineRunner, ServletContextListener {
@@ -71,7 +68,7 @@ public class IndexController implements CommandLineRunner, ServletContextListene
     /**
      * 首页地址
      *
-     * @return
+     * 
      */
     @RequestMapping("/")
     public ModelAndView root(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "articleTypeId", required = false) String articleTypeId) {
@@ -129,8 +126,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到用户登录页面
-     *
-     * @return
      */
     @RequestMapping("/toLoginPage")
     public ModelAndView toLoginPage(HttpSession session) {
@@ -150,8 +145,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到用户注册页面
-     *
-     * @return
      */
     @RequestMapping("/toRegisterPage")
     public ModelAndView toRegisterPage(HttpSession session) {
@@ -171,8 +164,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到找回密码页面
-     *
-     * @return
      */
     @RequestMapping("/toSearchPasswordPage")
     public ModelAndView toSearchPasswordPage() {
@@ -187,7 +178,7 @@ public class IndexController implements CommandLineRunner, ServletContextListene
     /**
      * 跳转到用户后台页面
      *
-     * @return
+     * 
      */
     @RequestMapping("/toUserBackstagePage")
     public ModelAndView toUserBackstagePage() {
@@ -202,7 +193,7 @@ public class IndexController implements CommandLineRunner, ServletContextListene
     /**
      * 跳转到个人信息页面
      *
-     * @return
+     * 
      */
     @RequestMapping("/toPersonMessagePage")
     public ModelAndView toPersonMessagePage() {
@@ -216,8 +207,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到修改个人信息页面
-     *
-     * @return
      */
     @RequestMapping("/toPersonMessageUpdatePage")
     public ModelAndView toPersonMessageUpdatePage() {
@@ -231,8 +220,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到发布资源页面
-     *
-     * @return
      */
     @RequestMapping("/toWriteArticlePage")
     public ModelAndView toWriteArticlePage() {
@@ -248,8 +235,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到资源管理页面
-     *
-     * @return
      */
     @RequestMapping("/toArticleManagePage")
     public ModelAndView toArticleManagePage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "name", required = false) String name, @RequestParam(value = "state", required = false) Integer state, HttpSession session) {
@@ -292,8 +277,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到修改资源页面
-     *
-     * @return
      */
     @RequestMapping("/toUpdateArticlePage")
     public ModelAndView toUpdateArticlePage(Integer id) {
@@ -315,7 +298,7 @@ public class IndexController implements CommandLineRunner, ServletContextListene
     /**
      * 跳转到失效资源管理页面
      *
-     * @return
+     * 
      */
     @RequestMapping("/toArticleFailureManagePage")
     public ModelAndView toArticleFailureManagePage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "name", required = false) String name, @RequestParam(value = "state", required = false) Integer state, HttpSession session) {
@@ -358,8 +341,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到评论管理页面
-     *
-     * @return
      */
     @RequestMapping("/toCommentManagePage")
     public ModelAndView toCommentManagePage(@RequestParam(value = "page", required = false) Integer page, HttpSession session) {
@@ -457,9 +438,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 用户下载资源时判断积分是否足够
-     *
-     * @param articleId
-     * @return
      */
     @ResponseBody
     @RequestMapping("/checkPoints")
@@ -483,8 +461,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
     /**
      * 用户是否下载过资源
      *
-     * @param articleId
-     * @return
      */
     @ResponseBody
     @RequestMapping("/checkIsDownload")
@@ -505,8 +481,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到查看我的下载页面
-     *
-     * @return
      */
     @RequestMapping("/toMyDownloadPage")
     public ModelAndView toMyDownloadPage(@RequestParam(value = "page", required = false) Integer page, HttpSession session) {
@@ -535,10 +509,7 @@ public class IndexController implements CommandLineRunner, ServletContextListene
     }
 
     /**
-     * 跳转到系统消息页面
-     *
-     * @param session
-     * @return
+     * 跳转到系统消息页
      */
     @RequestMapping("/toInformationPage")
     public ModelAndView toInformationPage(@RequestParam(value = "page", required = false) Integer page, HttpSession session) {
@@ -565,8 +536,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 登录请求
-     *
-     * @return
      */
     @RequestMapping("/login")
     public Object login(HttpSession session) {
@@ -577,8 +546,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 进入后台管理请求
-     *
-     * @return
      */
     @RequestMapping("/admin")
     public String toAdmin() {
@@ -587,10 +554,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 验证码是否正确
-     *
-     * @param imageCode
-     * @param session
-     * @return
      */
     @ResponseBody
     @RequestMapping("/checkCodeIsSuccess")
@@ -610,8 +573,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
 
     /**
      * 跳转到源码下载页面
-     *
-     * @return
      */
     @RequestMapping("/toDownloadCodePage")
     public ModelAndView toDownloadCodePage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "name", required = false) String name, @RequestParam(value = "state", required = false) Integer state, HttpSession session) {
@@ -629,7 +590,6 @@ public class IndexController implements CommandLineRunner, ServletContextListene
             map.put("userId", currentUser.getId());
             total = articleService.getTotal(map);
             downFiles = articleService.selectResource(currentUser.getId().toString());
-            //获取资源类型
             List<ArticleType> list = articleTypeService.list(null);
             Map<Integer, String> collect = list.stream().collect(Collectors.toMap(ArticleType::getId, ArticleType::getName));
             downFiles.stream().forEach(d->{
