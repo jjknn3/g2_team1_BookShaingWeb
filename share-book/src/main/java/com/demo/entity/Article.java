@@ -6,7 +6,7 @@ import java.util.Date;
  * 文章实体
  *
  
- * @company
+ * 
  *
  */
 public class Article {
